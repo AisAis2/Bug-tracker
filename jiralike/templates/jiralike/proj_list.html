@@ -1,0 +1,33 @@
+{%extends 'jiralike/base.html' %}
+{%block title%}Projects | BTR {%endblock%}
+
+
+{% block content%}
+<div class="container">
+	<div class= 'row'>
+			<table class= 'table'>
+				<thead>
+					<tr>
+						<th scope='col'>id</th>
+						<th scope='col'>Project Name</th>
+						<th scope='col'>Submitter</th>
+						<th scope='col'>Project Description</th>
+						<th scope='col'># of tickets</th>
+					</tr>
+				</thead>
+				<tbody>
+						{%for p in pj.all%}
+						<tr>
+						<!-- <th scope='row'>s</th> -->
+						<td><a href=/{{p.id}}>{{p.id}}</a></td>
+						<td><a href=/{{p.id}}>{{p.name}}</a></td>
+						<td><a href=/{{p.id}}>{{p.user}}</a></td>
+						<td>{{p.description}}</td>
+						<td>{{p.ticket_set.all.count}}</td>
+						</tr>
+						{%endfor%}
+				</tbody>
+			</table>
+	</div>
+</div>
+{% endblock %}

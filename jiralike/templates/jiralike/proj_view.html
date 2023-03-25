@@ -1,0 +1,130 @@
+{%extends 'jiralike/base.html' %}
+
+{%block content%}
+<form method="post" action="#">
+	{% csrf_token %}
+	<div class="container">
+		<h1>Project Details</h1>
+		<button type='submit' , name='editProject1' , value='ticket1' class='btn btn-outline-primary'>Edit</button>
+	</div>
+
+
+	<div class="container border my-5 text-dark border-dark">
+		<div class="row">
+			<div class='col-5'>
+				<h3>Project name:</h3>
+				<div>{{proj.name}}</div>
+
+			</div>
+			<div class='col-7'>
+				<h3>Description:</h3>
+				<p class="mt-4">{{proj.description}}</p>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<!-- <div class = 'container'>
+	<label for="exampleFormControlTextarea1" class="form-label bold">Project Description</label>
+		<textarea class="form-control" , rows = 3 name ='change'></textarea> 
+		<div class="d-flex justify-content-end">
+			<button type = 'submit', name ='save', value='save' class = 'btn btn-success my-4'>Change Desc</button>
+		</div>	
+</div>
+ -->
+	<div class="container">
+		<div class="row">
+			<div class="col shadow border">
+				<table class='table'>
+					<thead>
+						<tr>
+							<th scope='col'>Title</th>
+							<th scope='col'>Submitter</th>
+							<th scope='col'>Developer</th>
+							<th scope='col'>Status</th>
+							<th scope='col'>Created</th>
+							<th scope='col'>Type</th>
+							<th scope='col'></th>
+						</tr>
+					</thead>
+					<tbody>
+						{%for ticket in proj.ticket_set.all%}
+						<tr>
+
+							<td>{{ticket.title}}</td>
+							<td>{{ticket.submitter}}</td>
+							<td>{{ticket.assignee}}</td>
+							<td>{{ticket.status}}</td>
+							<td>{{ticket.created}}</td>
+							<td>{{ticket.types}}</td>
+							<td><a href="{% url 'ticket:ticket' ticket.id %}">Details</a></td>
+						</tr>
+						{%endfor%}
+					</tbody>
+				</table>
+			</div>
+			
+			<div class="col shadow border">
+				<h4>Assigned people</h4>
+				<table class='table'>
+					<thead>
+						<tr>
+							<th scope='col'>User Name</th>
+							<th scope='col'>Email</th>
+							<th scope='col'>Role</th>
+						</tr>
+					</thead>
+					<tbody>
+						{%for p in proj.ticket_set.all%}
+						<tr>
+
+							<td><a href="{% url 'ticket:ticket' p.id %}">{{p.assignee}}</a></td>
+							<td>{{p.assignee.email}}</td>
+							<td>{{p.assignee}}</td>
+
+						</tr>
+						{%endfor%}
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+
+		
+
+	</div>
+	<div class="row">
+		<div class="col"><button type='submit' , name='addTicket' , value='ticket' class='btn btn-success my-5'>Add Ticket</button></div>
+		<div class="col">
+			<button type="button" class="btn btn-outline-danger my-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+				Delete the project
+			</button>
+		</div>
+	</div>
+	<!-- Button trigger modal -->
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					Are you sure you want to delete the project?
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+					<button type="submit" name='delete' value='deleteProject' class="btn btn-danger">Yes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</form>{%endblock%}

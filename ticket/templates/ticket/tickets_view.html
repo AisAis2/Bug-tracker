@@ -1,0 +1,48 @@
+{%extends 'jiralike/base.html' %}
+
+
+{%block content%}
+
+<div class="container">
+
+<div class="row">
+
+
+	<table class= 'table'>
+		<thead>
+			<tr>
+				<th scope='col'>Ticket Name</th>
+				<th scope='col'>Ticket Project</th>
+				<th scope='col'>Ticket Submitter</th>
+				<th scope='col'>Ticket Priority</th>
+				<th scope='col'>Ticket Type</th>
+			</tr>
+		</thead>
+		<tbody>
+				{%for t in tickets%}
+				<tr>
+				
+				<td><a href="{% url 'ticket:ticket' t.id %}">{{t.title}}</a></td>
+				<td>{{t.proj}}</td>
+				<td>{{t.assignee}}</td>
+				<td>{{t.priority}}</td>
+				<td>{{t.types}}</td>
+				
+				</tr>
+				{%endfor%}
+		</tbody>
+	</table>	
+
+</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-2">
+			<form method = 'get' action="{% url  'ticket:tview' %}">
+				<input  class = "form-control" name = 'query' type = 'text' value = "{{query}}" placeholder="Find a ticket,...">
+				<button class = "btn btn-primary my-3">Search</button>
+			</form>
+		</div>
+	</div>
+</div>
+{%endblock%}

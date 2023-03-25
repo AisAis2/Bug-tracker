@@ -1,0 +1,19 @@
+{%extends 'jiralike/base.html'%}
+
+
+{%block content%}
+{%load crispy_forms_tags%}
+<form method="post" action=".">
+{% csrf_token%}
+
+<div class="h3">
+    {{ form|crispy}}
+</div>
+<button type = 'submit', name ='save' class="btn btn-primary my-3">Create Ticket</button>	
+
+</form>
+
+
+
+
+{%endblock%}

@@ -1,0 +1,10 @@
+{%extends "jiralike/base.html" %}
+{%block title%}Registration Page{%endblock%}
+{%block content%}
+{%load crispy_forms_tags%}
+<div class = 'mx-5'>
+	<form method="POST" class = 'row g-1'>{%csrf_token%}{{form|crispy}}<button type ="submit" class ='btn btn-success'>Register</button>
+</form>
+</div>
+
+{%endblock%}

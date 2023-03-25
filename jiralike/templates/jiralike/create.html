@@ -1,0 +1,16 @@
+{%extends 'jiralike/base.html' %}
+
+
+{%block title%}Create a new project.{%endblock%}
+{%block content%}
+
+{%load crispy_forms_tags%}
+<form method="post" action = "#">
+	{% csrf_token %}
+		<div class="mb-3 cotainer-md  mx-2">
+			{{form|crispy}}
+		</div>
+	<button type = 'submit',name ='save' class="btn btn-primary mx-2">Create Project</button>
+</form>
+
+{%endblock%}

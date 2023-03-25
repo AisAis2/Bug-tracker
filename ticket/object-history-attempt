@@ -1,0 +1,63 @@
+from django.db import models
+
+from jiralike.models import Project, User
+# Create your models here.
+## Try to optimize history change of an object w/o django-simple-history
+class AbstractTicket(models.Model):
+	description = models.TextField(blank = True, null = True)
+	title = models.CharField(max_length=200, null=False, default='title')
+	submitter = models.ForeignKey(User, on_delete=models.SET_NULL, null = True)
+	assignee = models.ForeignKey(User, on_delete=models.SET_NULL,related_name='tickets',null=True)
+	proj = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
+	pty = 	[
+			('Lowest', 'Lowest'),
+			('Low','Low'),
+			('Medium','Medium'),
+			('High', 'High'),
+			('Highest','Highest'),
+			]	
+	sts =[
+		('Open','Open'),
+		('Done','Done'),
+		('In Progress', 'In Progress'),
+		]
+	priority = models.CharField(
+		max_length=20,
+		choices = pty,
+		default = 'Lowest'
+	)
+
+	status = models.CharField(
+		max_length=20,
+		choices = sts,
+		default = 'Open'
+	)
+	created = models.TimeField("Created", auto_now=False,auto_now_add=True)
+	class Meta:
+		app_label = 'ticket'
+		abstract = True
+
+	def __str__(self):
+		return self.title
+	
+
+class Ticket(AbstractTicket):
+	def save(self):
+		ticket = super(Ticket,self).save()
+		TicketHistory.objects.create(
+			ticket = ticket,
+			title = ticket.title,
+			submitter = ticket.submitter,
+			assignee = ticket.assignee,
+			proj = ticket.proj,
+			priority = ticket.priority,
+			status = ticket.status,
+			created = ticket.created,
+		)
+class TicketHistory(AbstractTicket):
+	ticket = models.ForeignKey(Ticket, on_delete = models.CASCADE,related_name ='chistory')
+	class Meta:
+		ordering = ['-pk']
+
+
+

@@ -1,0 +1,35 @@
+{%extends 'jiralike/base.html' %}
+
+
+{%block title%}Create a new project.{%endblock%}
+{%block content%}
+
+
+<form method="post" action = "#">
+	{% csrf_token %}
+	
+<div class="mb-3 cotainer-md  mx-2">
+	
+	<div class ='row'>
+		<div class ='col-4'>
+			<div class="mb-3">
+			  <label for="exampleFormControlInput1" class="form-label">Project Title</label>
+		  		<input type="text" class="form-control" name = "title">
+					</div>
+				</div>
+			</div>
+
+<div class = 'cotainer-md  mx-1'>
+	<div class ='row'>
+		<div class ='col-4'>
+		<div class="mb-3">
+  			<label for="exampleFormControlTextarea1" class="form-label">Project Description</label>
+ 			 <textarea class="form-control" rows="3" name = "description"></textarea>
+				</div>
+				</div>
+		</div>
+</div>
+	<button type = 'submit',name ='save' class="btn btn-primary mx-2">Create Project</button>
+</form>
+
+{%endblock%}

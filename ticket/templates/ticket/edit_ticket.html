@@ -1,0 +1,18 @@
+{%extends 'jiralike/base.html' %}
+
+
+
+{%block content%}
+<div class="container">
+	<div class="row">
+		<div class ='col-5'>
+			<form method = 'POST' action ='#' class="form-group">
+				{%csrf_token%}
+					{{form.as_p}}
+					<button type = 'submit', name ='save' value ='update' class="btn btn-primary my-3">Udpate Ticket</button>
+					<button type = 'submit', name ='delete' value ='delete' class="btn btn-primary my-3">Delete</button>
+			</form>	
+		</div>
+	</div>
+</div>
+{%endblock%}
