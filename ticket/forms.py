@@ -4,7 +4,7 @@ from .models import Ticket
 class createTicket(forms.ModelForm):
 	class Meta:
 		model = Ticket
-		exclude = ('submitter',)
+		exclude = ('submitter','proj')
 		widgets = {
 			'title': forms.TextInput(attrs={
 				'class': 'input-group input-group-sm mb-3'
@@ -15,9 +15,9 @@ class createTicket(forms.ModelForm):
 			'assignee': forms.Select(attrs={
 				'class': 'form-select form-select-sm'
 			}),
-			'proj': forms.Select(attrs={
-				'class': 'form-select form-select-sm'
-			}),
+			# 'proj': forms.Select(attrs={
+			# 	'class': 'form-select form-select-sm'
+			# }),
 			'priority': forms.Select(attrs={
 				'class': 'form-select form-select-sm'
 			}),

@@ -7,36 +7,26 @@
 		<h1>Project Details</h1>
 		<button type='submit' , name='editProject1' , value='ticket1' class='btn btn-outline-primary'>Edit</button>
 	</div>
-
-
 	<div class="container border my-5 text-dark border-dark">
 		<div class="row">
-			<div class='col-5'>
+			<div class='col'>
 				<h3>Project name:</h3>
 				<div>{{proj.name}}</div>
-
 			</div>
-			<div class='col-7'>
+			<div class='col'>
 				<h3>Description:</h3>
 				<p class="mt-4">{{proj.description}}</p>
 			</div>
+			<div class='col'>
+				<h3>Creator:</h3>
+				<p class="mt-4">{{proj.user}}</p>
+			</div>
 		</div>
 	</div>
-
-
-
-
-	<!-- <div class = 'container'>
-	<label for="exampleFormControlTextarea1" class="form-label bold">Project Description</label>
-		<textarea class="form-control" , rows = 3 name ='change'></textarea> 
-		<div class="d-flex justify-content-end">
-			<button type = 'submit', name ='save', value='save' class = 'btn btn-success my-4'>Change Desc</button>
-		</div>	
-</div>
- -->
 	<div class="container">
 		<div class="row">
 			<div class="col shadow border">
+				<h4>Tickets</h4>
 				<table class='table'>
 					<thead>
 						<tr>
@@ -65,7 +55,7 @@
 					</tbody>
 				</table>
 			</div>
-			
+
 			<div class="col shadow border">
 				<h4>Assigned people</h4>
 				<table class='table'>
@@ -92,13 +82,14 @@
 			</div>
 		</div>
 
-		
+
 
 	</div>
 	<div class="row">
-		<div class="col"><button type='submit' , name='addTicket' , value='ticket' class='btn btn-success my-5'>Add Ticket</button></div>
+
 		<div class="col">
-			<button type="button" class="btn btn-outline-danger my-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+			<button type="button" class="btn btn-outline-danger my-5" data-bs-toggle="modal"
+				data-bs-target="#staticBackdrop">
 				Delete the project
 			</button>
 		</div>
@@ -127,4 +118,11 @@
 	</div>
 
 
-</form>{%endblock%}
+</form>
+<form method = 'POST' action ='{% url "ticket:create_ticket" proj.id %}'>
+	{%csrf_token%}
+	<div class="col">
+		<button type='submit' , name='addTicket' , value='ticket' class='btn btn-success my-5'>Add Ticket</button>
+	</div>
+</form>
+{%endblock%}

@@ -21,9 +21,12 @@
                 </div>
             </div>
         </div>
+        <a href = '{% url "ticket:edit" ticket.id %}'><button type = 'submit', name ='save' value ='update'class="btn btn-primary my-3">Edit ticket</button></a>
     </div>
+    <div class="col-6">{{ticket.history.all}}</div>
     </div>
-    <a href = '{% url "ticket:edit" ticket.id %}'><button type = 'submit', name ='save' value ='update'class="btn btn-primary my-3">Edit ticket</button></a>
     
 </div>
+
+
 {%endblock%}

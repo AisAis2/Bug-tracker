@@ -8,16 +8,17 @@ from django.contrib.auth.decorators import permission_required
 from django.urls import reverse
 from django.db.models import Q
 # Create your views here.
-@permission_required("ticket.add_ticket")
-def test(response):
-	
+
+def test(response,pk):
+	pj = Project.objects.get(id = pk)
 	if response.method == 'POST':
 		form = createTicket(response.POST)
-		if form.is_valid:
+		if form.is_valid():
 			tck = form.save(commit = False)
 			tck.submitter = response.user
+			tck.proj = pj
 			tck.save()
-			return HttpResponseRedirect("/home")
+			return HttpResponseRedirect(reverse('ticket:tview'))
 	else:
 		form = createTicket()
 	return render(response, 'ticket/test.html',{
@@ -30,22 +31,15 @@ def test(response):
 def create_ticket(response):
 	user = User.objects.all()
 	pj = Project.objects.all()
-	
-    
-
 	if response.method == 'POST':
 		form = createTicket(response.POST)
-		print(response.POST)
-		print(form.errors.as_data())
 		if form.is_valid():
-			tt= form.cleaned_data['title']
-			pp = form.cleaned_data['proj']
-			pr = form.cleaned_data['priority']
-			t= Ticket(title = tt, proj = pp, priority =pr, assignee = response.user)
-			t.save()
+			tck = form.save(commit = False)
+			tck.proj = pj
+			tck.save()
 			return HttpResponseRedirect('/home')
 	return render(response, "ticket/create_ticket.html",{
-        "user":user,'pj':pj,
+        "user":user,
         
         })
 

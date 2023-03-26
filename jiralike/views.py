@@ -9,6 +9,7 @@ from ticket.models import Ticket
 from jiralike.models import User
 from django.urls import reverse
 from django.contrib.auth.decorators import permission_required
+from ticket.views import test
 # Create your views here.
 def index(response):
 	return render(response, "jiralike/index.html")
@@ -24,34 +25,24 @@ def home(response):
 
 
 def proj(response, id):
-	if Project.objects.filter(id = id).exists():
-		pj = get_object_or_404(Project,id = id)
-	else:
-		return HttpResponseRedirect('/home')
+	pj = get_object_or_404(Project,id = id)
 	if response.user.is_anonymous:
 		msg = 'You are not authorized'
 		return render(response, 'jiralike/index.html',{'msg':msg})
-	if pj in response.user.project.all():
-		
-		if response.method == "POST":
-			
-			if response.POST.get("editProject1"):
-				
-				return HttpResponseRedirect('/edit/%s' % id)
-				# return edit(response, id) passing response didnt really work,lol
+	if response.method == "POST":
+		if response.POST.get("editProject1"):
+			return HttpResponseRedirect('/edit/%s' % id)
+			# return edit(response, id) passing response didnt really work,lol
+		if response.POST.get('delete') and pj.user == response.user:
+			pj.delete()
+			return HttpResponseRedirect("/home")
+		else:
+			msg = 'You are not authorized to delete this project.'
+			return render(response, 'jiralike/index.html',{'msg':msg})
+	# if response.GET.get("addTicket",''):
+	# 	return HttpResponseRedirect(reverse("ticket"))
+	return render(response,"jiralike/proj_view.html",{"proj":pj})
 
-			if response.POST.get('delete'):
-				pj.delete()
-				return HttpResponseRedirect("/home")
-			if response.POST.get("save"):
-				if len(response.POST.get("change"))>2:
-					pj.description = response.POST.get("change")
-					pj.save()
-			elif response.POST.get("addTicket"):
-				return HttpResponseRedirect(reverse("ticket:create_ticket"))
-		return render(response,"jiralike/proj_view.html",{"proj":pj})
-	else:
-		return HttpResponseRedirect("/home")
 
 def edit(response,id):
 	print('response is:   ')
@@ -96,7 +87,11 @@ def view(response):
 		return HttpResponseRedirect('/login')
 	else:
 		pj = Project.objects.filter(user = response.user)
-		return render(response, "jiralike/proj_list.html",{"pj":pj})
+		tcks = Ticket.objects.filter(assignee = response.user)
+		return render(response, "jiralike/proj_list.html",{
+			"pj":pj,
+			'tcks':tcks,
+			})
 
 
 

@@ -19,11 +19,19 @@
 						{%for p in pj.all%}
 						<tr>
 						<!-- <th scope='row'>s</th> -->
-						<td><a href=/{{p.id}}>{{p.id}}</a></td>
+						<td><a href="{% url 'proj' p.id %}">{{p.id}}</a></td>
 						<td><a href=/{{p.id}}>{{p.name}}</a></td>
 						<td><a href=/{{p.id}}>{{p.user}}</a></td>
 						<td>{{p.description}}</td>
 						<td>{{p.ticket_set.all.count}}</td>
+						</tr>
+						{%endfor%}
+						{%for tt in tcks%}
+						<td><a href="{% url 'proj' tt.proj.id %}">{{tt.proj.id}}</a></td>
+						<td><a href=/{{tt.proj.id}}>{{tt.proj.name}}</a></td>
+						<td><a href=/{{tt.proj.id}}>{{tt.proj.user}}</a></td>
+						<td>{{tt.description}}</td>
+						<td>{{tcks.count}}</td>
 						</tr>
 						{%endfor%}
 				</tbody>
