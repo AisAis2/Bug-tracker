@@ -1,13 +1,14 @@
 {%extends 'jiralike/base.html' %}
 
 {%block content%}
+<div class="container mx-1">
 <form method="post" action="#">
 	{% csrf_token %}
-	<div class="container">
+	
 		<h1>Project Details</h1>
 		<button type='submit' , name='editProject1' , value='ticket1' class='btn btn-outline-primary'>Edit</button>
 	</div>
-	<div class="container border my-5 text-dark border-dark">
+	<div class="container border my-5 mx-1 text-dark border-dark">
 		<div class="row">
 			<div class='col'>
 				<h3>Project name:</h3>
@@ -23,7 +24,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container mx-1">
 		<div class="row">
 			<div class="col shadow border">
 				<h4>Tickets</h4>
@@ -86,9 +87,8 @@
 
 	</div>
 	<div class="row">
-
 		<div class="col">
-			<button type="button" class="btn btn-outline-danger my-5" data-bs-toggle="modal"
+			<button type="button" class="btn btn-outline-danger my-5 mx-1" data-bs-toggle="modal"
 				data-bs-target="#staticBackdrop">
 				Delete the project
 			</button>

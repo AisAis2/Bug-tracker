@@ -1,5 +1,52 @@
 {% extends 'jiralike/base.html' %}
+{%block head%}
+{%load static%}
+<script src ="{% static 'canvasjs.min.js' %}" ></script>
+<script>
+    const names = ["Tickets by Type","Tickets by Priority"] 
+    const arr = {{data_points |safe}}
+    const chts = ["cc1","cc2"]
+    window.onload = function() {
+        
+        var chart = new CanvasJS.Chart(chts[1],{
+            theme:"light2",
+            animationEnabled: true,
+            title:{
+                text : names[1]
+            },
+            data:[{
+                type :"column",
+                dataPoints: arr[1]
+            }]
+        });
+        var chart1 = new CanvasJS.Chart(chts[0],{
+            theme:"light2",
+            animationEnabled: true,
+            title:{
+                text : names[0]
+            },
+            data:[{
+                type :"column",
+                dataPoints: arr[0]
+            }]
+        });
+        chart.render();
+
+        chart1.render();
+    }
+</script>
+{% endblock %}
+
 {%block content%}
 
-<h1>Home Page</h1>
-{% endblock %}
+<div class="container mx-1">
+    <div class="row">
+        <div class="col-6">
+            <div id="cc1"></div>
+        </div>
+        <div class="col-6">
+            <div id="cc2"></div>
+        </div>
+    </div>
+</div>
+{%endblock%}

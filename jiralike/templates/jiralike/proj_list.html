@@ -3,7 +3,8 @@
 
 
 {% block content%}
-<div class="container">
+{%if pj.exists%}
+<div class="container mx-1">
 	<div class= 'row'>
 			<table class= 'table'>
 				<thead>
@@ -26,16 +27,23 @@
 						<td>{{p.ticket_set.all.count}}</td>
 						</tr>
 						{%endfor%}
+
+						
 						{%for tt in tcks%}
-						<td><a href="{% url 'proj' tt.proj.id %}">{{tt.proj.id}}</a></td>
-						<td><a href=/{{tt.proj.id}}>{{tt.proj.name}}</a></td>
-						<td><a href=/{{tt.proj.id}}>{{tt.proj.user}}</a></td>
-						<td>{{tt.description}}</td>
-						<td>{{tcks.count}}</td>
-						</tr>
+							{%if tt in pj.all%}
+							<td><a href="{% url 'proj' tt.proj.id %}">{{tt.proj.id}}</a></td>
+							<td><a href=/{{tt.proj.id}}>{{tt.proj.name}}</a></td>
+							<td><a href=/{{tt.proj.id}}>{{tt.proj.user}}</a></td>
+							<td>{{tt.description}}</td>
+							<td>{{tcks.count}}</td>
+							</tr>
+							{%endif%}
 						{%endfor%}
 				</tbody>
 			</table>
 	</div>
 </div>
+{%else%}
+<div><h2>No assigned projects</h2></div>
+{%endif%}
 {% endblock %}

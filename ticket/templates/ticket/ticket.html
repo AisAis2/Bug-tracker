@@ -1,22 +1,61 @@
 {%extends 'jiralike/base.html' %}
 {%block content%}
-<div class="container py-4">
+<div class="container mx-1 my-5">
     <div class="row">
        <div class="col-6"> 
-        <div class="card border border-dark shadow">
+        <div class="card border shadow">
             <div class="card-body">
                 <div class="card-title h2">Ticket Information</div>
                 <div class="card-text">
-                    <div class="row">
+                    <div class="row my-2">
                         <div class="col">
-                            <div class="row my-3 "><div class="col-5 text-success h4">Project</div><div class="col-7">{{ticket.proj}}</div></div>
-                            <div class="row my-3 "><div class="col-5 text-success h4">Priority</div><div class="col-7">{{ticket.priority}}</div></div>
-                            <div class="row my-3 "><div class="col-5 text-success h4">Title</div><div class="col-7">{{ticket.title}}</div></div>
-                            <div class="row my-3 "><div class="col-5 text-success h4">Assignee</div><div class="col-7">{{ticket.assignee}}</div></div>
-                            <div class="row my-3 "><div class="col-5 text-success h4">Description</div><div class="col-7">{{ticket.description}}</div></div>
-                            <div class="row my-3 "><div class="col-5 text-success h4">Time Created</div><div class="col-7">{{ticket.created}}</div></div>
+                            <label for = "ticket_title" class="lead text-primary">Ticket Title</label>
+                            <div>{{ticket.title}}</div>
                         </div>
-
+                        <div class="col">
+                            <label for = "ticket_desc" class="lead text-primary">Ticket Description</label>
+                            <div >{{ticket.description}}</div>
+                        </div>
+                    </div>
+                    <div class="row my-2">
+                        <div class="col">
+                            <label for = "ticket_assignee" class="lead text-primary">Assigned Developer</label>
+                            <div>{{ticket.assignee}}</div>
+                        </div>
+                        <div class="col">
+                            <label for = "ticket_submitter" class="lead text-primary">Submitter</label>
+                            <div >{{ticket.submitter}}</div>
+                        </div>
+                    </div>
+                    <div class="row my-2">
+                        <div class="col">
+                            <label for = "ticket_project" class="lead text-primary">Project</label>
+                            <div>{{ticket.proj}}</div>
+                        </div>
+                        <div class="col">
+                            <label for = "ticket_priority" class="lead text-primary">Ticket Priority</label>
+                            <div >{{ticket.priority}}</div>
+                        </div>
+                    </div>
+                    <div class="row my-2">
+                        <div class="col">
+                            <label for = "ticket_status" class="lead text-primary">Ticket Status</label>
+                            <div>{{ticket.status}}</div>
+                        </div>
+                        <div class="col">
+                            <label for = "ticket_type" class="lead text-primary">Ticket Type</label>
+                            <div >{{ticket.types}}</div>
+                        </div>
+                    </div>
+                    <div class="row my-2">
+                        <div class="col">
+                            <label for = "ticket_created" class="lead text-primary">Created</label>
+                            <div>{{ticket.created}}</div>
+                        </div>
+                        <div class="col">
+                            <label for = "ticket_type" class="lead text-primary">Updated</label>
+                            <div ></div>
+                        </div>
                     </div>
                 </div>
             </div>

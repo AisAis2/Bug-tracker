@@ -17,8 +17,44 @@ def index(response):
 
 	
 def home(response):
-	# print(response.user.type)
-	return render(response, "jiralike/home.html",{"user":response.user})
+	tck = Ticket.objects.all()
+
+	bug_errors,feature_requests,other_comments =0,0,0
+	lowest,low,medium,high,highest=0,0,0,0,0
+	for t in tck:
+		if t.types == 'Bugs/errors':
+			bug_errors+=1
+		elif t.types == 'Feature Requests':
+			feature_requests+=1
+		elif t.types == 'Other Comments':
+			other_comments+=1
+		s = t.priority
+		if s =="Low":
+			low+=1
+		elif s == "Medium":
+			medium+=1
+		elif s=="High":
+			high+=1
+		elif s=="Highest":
+			highest+=1	
+		else:
+			lowest+=1
+	data_points =[
+		{"label":"Bugs/errors","y":bug_errors},
+		{"label":'Feature Requests',"y":feature_requests},
+		{"label":'Other Comments',"y":other_comments},
+	]
+	data_points2 =[
+		{"label":"Lowest","y":lowest},
+		{"label":'Low',"y":low},
+		{"label":'Medium',"y":medium},
+		{"label":'High',"y":high},
+		{"label":'Highest',"y":highest},
+	]
+	dp=[]
+	dp.append(data_points)
+	dp.append(data_points2)
+	return render(response, "jiralike/home.html",{"user":response.user, "data_points":dp})
 
 
 
@@ -66,6 +102,7 @@ def edit(response,id):
 
 
 @login_required
+@permission_required("jiralike.add_project")
 def create(response):
 	
 	if response.method == "POST":
@@ -88,6 +125,7 @@ def view(response):
 	else:
 		pj = Project.objects.filter(user = response.user)
 		tcks = Ticket.objects.filter(assignee = response.user)
+		
 		return render(response, "jiralike/proj_list.html",{
 			"pj":pj,
 			'tcks':tcks,
