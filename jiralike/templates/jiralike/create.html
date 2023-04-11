@@ -5,19 +5,42 @@
 {%block content%}
 
 {%load crispy_forms_tags%}
-<div class="container mx-1">
-	<div class="row">
-		<div class="col-4">
-			<form method="post" action = "#">
-				{% csrf_token %}
-					<div class="mb-3 cotainer-md  mx-2">
-						{{form|crispy}}
+{%load static%}
+<div class="row">
+	<div class="col-4"></div>
+	<div class="col-4">
+		<div class="card border-light">
+			<img src="{%static 'project.jpg'%}" class="card-img-top my-5" height="140 px" >
+		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+			New Project
+		</button>
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header bg-primary">
+						<h5 class="modal-title" id="exampleModalLabel">New Project</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
-				<button type = 'submit',name ='save' class="btn btn-primary mx-2">Create Project</button>
-			</form>
+					<form method="post" action="#">
+						<div class="modal-body">
+							{% csrf_token %}
+							{{form|crispy}}
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							<button type='submit' ,name='save' class="btn btn-primary mx-2">Create Project</button>
+					</form>
+				</div>
+			</div>
 		</div>
+		</div>
+		</div>
+		<div class="col-4"></div>
 	</div>
 </div>
+
+
+
 
 
 {%endblock%}

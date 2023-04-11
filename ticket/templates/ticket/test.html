@@ -6,11 +6,10 @@
 <form method="post" action=".">
 {% csrf_token%}
 
-<div class="h3">
-    {{ form|crispy}}
-</div>
+    <div class="h3">
+        {{ form|crispy}}
+    </div>
 <button type = 'submit', name ='save' class="btn btn-primary my-3">Create Ticket</button>	
-
 </form>
 
 

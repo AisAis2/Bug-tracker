@@ -9,5 +9,6 @@ path("create/",views.create, name = "create"),
 path("<int:id>",views.proj, name = "proj"),
 path("view/",views.view, name = "view"),
 path("edit/<int:id>/", views.edit, name ='edit'),
+path('user/',views.user, name='current_user')
 
 ]

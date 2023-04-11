@@ -46,12 +46,22 @@ INSTALLED_APPS = [
     'ticket',
     'simple_history',
     
+    'rest_framework',
+    'rest_framework.authtoken',
+    'corsheaders',
+    'djoser',
     
+    
+]
+
+CORS_ALLOWED_ORIGINS =[
+    "http://localhost:8080", #address to front-end
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware', #must above x.common.CommonMiddleware; django must first go thorugh this one
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',

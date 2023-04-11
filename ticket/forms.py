@@ -4,7 +4,8 @@ from .models import Ticket
 class createTicket(forms.ModelForm):
 	class Meta:
 		model = Ticket
-		exclude = ('submitter','proj')
+		fields = ['title','assignee','priority','status','types','description']
+		
 		widgets = {
 			'title': forms.TextInput(attrs={
 				'class': 'input-group input-group-sm mb-3'

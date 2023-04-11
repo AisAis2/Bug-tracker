@@ -46,3 +46,4 @@ class Command(BaseCommand):
                     watcher_group.permissions.add(p)
             Almaz = User.objects.get(username = 'Kamila')
             Almaz.groups.add(watcher_group)
+            

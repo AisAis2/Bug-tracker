@@ -6,7 +6,7 @@
 {%if pj.exists%}
 <div class="container mx-1">
 	<div class= 'row'>
-			<table class= 'table'>
+			<table class= 'table table-bordered '>
 				<thead>
 					<tr>
 						<th scope='col'>id</th>
@@ -20,7 +20,7 @@
 						{%for p in pj.all%}
 						<tr>
 						<!-- <th scope='row'>s</th> -->
-						<td><a href="{% url 'proj' p.id %}">{{p.id}}</a></td>
+						<td class='table-primary'><a href="{% url 'proj' p.id %}">{{p.id}}</a></td>
 						<td><a href=/{{p.id}}>{{p.name}}</a></td>
 						<td><a href=/{{p.id}}>{{p.user}}</a></td>
 						<td>{{p.description}}</td>

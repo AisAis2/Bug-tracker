@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from register import views as vw
+import ticket.views as tt
+import jiralike.views as pp
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,4 +25,8 @@ urlpatterns = [
     path('register/',vw.register, name = 'register'),
     path('',include("django.contrib.auth.urls")),
     path('tickets/',include('ticket.urls')),
+    path('api/v1/', include('djoser.urls.authtoken')),
+    path('api/v1/', include('djoser.urls')),
+    path('api/v1/tickets_list', tt.TicketList.as_view()),
+    path('api/v1/project_list',pp.ProjectsView.as_view()),
 ]

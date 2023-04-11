@@ -1,7 +1,6 @@
 {%extends 'jiralike/base.html' %}
 
 {%block content%}
-{%load crispy_forms_tags%}
 <div class="container mx-1">
 <form method="post" action="#">
 	{% csrf_token %}
@@ -9,7 +8,7 @@
 		<h1>Project Details</h1>
 		<button type='submit' , name='editProject1' , value='ticket1' class='btn btn-outline-primary'>Edit</button>
 	</div>
-	<div class="container border my-5 mx-1 text-dark border-dark bg-secondary bg-gradient">
+	<div class="container border my-5 mx-1 text-dark border-dark">
 		<div class="row">
 			<div class='col'>
 				<h3>Project name:</h3>
@@ -25,10 +24,9 @@
 			</div>
 		</div>
 	</div>
-
-		
-		<div class="d-flex flex-row">
-			<div class="me-3 shadow border flex-fill">
+	<div class="container mx-1">
+		<div class="row">
+			<div class="me-5 col-6 shadow border fl">
 				<h4>Tickets</h4>
 				<table class='table my-3'>
 					<thead>
@@ -64,9 +62,9 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="flex-fill shadow border flex-shrink-0">
-				<h4 class="m-2">Assigned people</h4>
-				<table class='table my-3 m-2'>
+			<div class="col-4 shadow border">
+				<h4>Assigned people</h4>
+				<table class='table my-3'>
 					<thead>
 						<tr>
 							<th scope='col'>User Name</th>
@@ -90,6 +88,7 @@
 
 
 
+	</div>
 	<div class="row">
 		<div class="col">
 			<button type="button" class="btn btn-outline-danger my-5 mx-1" data-bs-toggle="modal"
@@ -121,40 +120,12 @@
 		</div>
 	</div>
 
+
 </form>
-
-
-
-
-
-
-
-<button type="button" class="btn btn-success my-5 mx-1" data-bs-toggle="modal" data-bs-target="#AddTicket">
-Add ticket
-</button>
-<div class="modal fade" id="AddTicket" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="staticBackdropLabel">Add Ticket</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<form  method="POST" action="#">
-			<div class="modal-body">
-				
-					{%csrf_token%}
-					{{ticket_form|crispy}}
-
-
-				
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-				<button type="submit", name='addTicket1' value='addTicket1' class="btn btn-danger">Add</button>
-				</div>
-			</form>
-			</div>
-			</div>
-		</div>
+<form  action ='{% url "ticket:create_ticket" proj.id %}'>
+	{%csrf_token%}
+	<div class="col">
+		<button type='submit' , name='addTicket' , value='ticket' class='btn btn-success my-5'>Add Ticket</button>
 	</div>
-</div>
+</form>
 {%endblock%}

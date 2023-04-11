@@ -1,0 +1,20 @@
+{%extends 'jiralike/base.html' %}
+{%block title%}
+User | BTR
+{%endblock%}
+{%block content%}
+
+<div class="row my-2">
+    <div class="col-2">
+        <label for = "ticket_status" class="lead text-primary">User</label>
+        <div>{{request.user}}</div>
+    </div>
+    <div class="col-2">
+        <label for = "ticket_type" class="lead text-primary">Email</label>
+        <div >{{request.user.email}}</div>
+    </div>
+</div>
+<script>
+    console.log('test')
+</script>
+{%endblock%}

@@ -1,2 +1,3 @@
 *.txt
 object-history-attempt.py
+*.sqlite3

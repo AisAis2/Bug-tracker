@@ -11,36 +11,51 @@
   {%block head%}{%endblock%}
 </head>
 
+
+
+
+
+
 <body>
-  <div class="container-fluid ">
+  <div class="container-fluid">
     <div class="row flex-nowrap">
-      <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-white border shadow ">
+      <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark bg-gradient border shadow  " style="width: 13%;">
         <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-dark min-vh-100">
           <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-primary text-decoration-none">
             <span class="fs-5 d-none d-sm-inline">Menu</span>
           </a>
+          <hr>
           <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-            <li class="nav-item">
+            <li class="nav-item mb-1">
               <a href="/home" class="nav-link align-middle px-0">
-                <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+                <i class="bi bi-clipboard-data"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span>
               </a>
             </li>
             <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-              <li class="nav-item">
+
+              <li class="nav-item mb-1">
                 <a href="/view" class="nav-link align-middle px-0">
-                  <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">My Projects</span>
+                  <i class="bi bi-kanban-fill"></i> <span class="ms-1 d-none d-sm-inline">My Projects</span>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item mb-1">
                 <a href="{% url 'create' %}" class="nav-link align-middle px-0">
-                  <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Create</span>
+                  <i class="bi bi-plus-circle-fill"></i><span class="ms-1 d-none d-sm-inline">Create</span>
                 </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item mb-1">
                 <a href="{% url 'ticket:tview' %}" class="nav-link align-middle px-0">
-                  <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Tickets</span>
+                  <i class="bi bi-ticket-perforated-fill"></i> <span class="ms-1 d-none d-sm-inline">Tickets</span>
                 </a>
               </li>
+
+
+              <li class="nav-item">
+                <a href="{% url 'current_user' %}" class="nav-link align-middle px-0">
+                  <i class="bi bi-person-fill"></i><span class="ms-1 d-none d-sm-inline">User</span>
+                </a>
+              </li>
+
 
             </ul>
             <hr>
@@ -50,7 +65,7 @@
 
       <div class="col">
         <div class="row sticky-top">
-          <nav class="navbar navbar-expand-lg navbar-white bg-white shadow">
+          <nav class="navbar navbar-expand-lg navbar-white  shadow">
             <div class="col-8">
 
               {% if user.is_anonymous == False%}
@@ -68,9 +83,7 @@
             </div>
           </nav>
         </div>
-        <div class="d-flex bd-highlight h-100">
-          <div class="flex-grow-1 bd-highlight">{%block content%}{%endblock%}</div>
-        </div>
+        {%block content%}{%endblock%}
       </div>
     </div>
 

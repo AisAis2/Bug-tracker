@@ -6,10 +6,11 @@ from simple_history.models import HistoricalRecords
 
 class Ticket(models.Model):
 	description = models.TextField(blank = True, null = True)
+	slug = models.SlugField(default='slug')
 	title = models.CharField(max_length=200, null=False, default='title')
 	submitter = models.ForeignKey(User, on_delete=models.SET_NULL, null = True)
 	assignee = models.ForeignKey(User, on_delete=models.SET_NULL,related_name='tickets',null=True)
-	proj = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
+	proj = models.ForeignKey(Project, on_delete=models.CASCADE, null=False, default = 1)
 	pty = 	[
 			('Lowest', 'Lowest'),
 			('Low','Low'),
@@ -50,3 +51,5 @@ class Ticket(models.Model):
 
 	def __str__(self):
 		return self.title
+	def get_absoulte_url(self):
+		return f'/{self.slug}/'
